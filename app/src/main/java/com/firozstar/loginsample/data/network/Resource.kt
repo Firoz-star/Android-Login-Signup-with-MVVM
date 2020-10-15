@@ -1,4 +1,4 @@
-package com.firozstar.loginsample.network
+package com.firozstar.loginsample.data.network
 
 import okhttp3.ResponseBody
 
@@ -9,4 +9,6 @@ sealed class Resource<out T> {
         val errorCode: Int?,
         val errorBody: ResponseBody?
     ) : Resource<Nothing>()
+
+    object Loading : Resource<Nothing>()
 }

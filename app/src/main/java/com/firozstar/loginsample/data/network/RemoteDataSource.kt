@@ -1,4 +1,4 @@
-package com.firozstar.loginsample.network
+package com.firozstar.loginsample.data.network
 
 import com.firozstar.loginsample.BuildConfig
 import okhttp3.OkHttpClient
@@ -12,12 +12,18 @@ class RemoteDataSource {
     }
 
     fun <Api> buildApi(
-        api: Class<Api>
+        api: Class<Api>,
+        authToken: String? = null
     ): Api {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(
-                OkHttpClient.Builder().also { client ->
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        chain.proceed(chain.request().newBuilder().also {
+                            it.addHeader("Authorization", "Bearer $authToken")
+                        }.build())
+                    }.also { client ->
 
                     if (BuildConfig.DEBUG) {
                         val logging = HttpLoggingInterceptor()

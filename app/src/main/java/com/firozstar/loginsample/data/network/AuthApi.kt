@@ -1,6 +1,6 @@
-package com.firozstar.loginsample.network
+package com.firozstar.loginsample.data.network
 
-import com.firozstar.loginsample.responses.LoginResponse
+import com.firozstar.loginsample.data.responses.LoginResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
